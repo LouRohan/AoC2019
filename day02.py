@@ -49,7 +49,7 @@ def main_part1():
         i += 4
 
     print("part 1 output: %s" % (str(prog)))
-    print("part 1 position 0: %s" % (str(prog[0])))
+    print("part 1 answer (position 0): %s" % (str(prog[0])))
 
 
 
@@ -109,16 +109,12 @@ def main_part2():
 
                 if prog[0] == desired_output:
                     print("Desired output reached with noun: %i verb: %i" % (noun, verb))
-                    print("Answer: %i" % (100 * noun + verb))
+                    print("Part 2 Answer: %i" % (100 * noun + verb))
                     exit(0)
 
                 i += 4
 
-        #print("part 1 output: %s" % (str(prog)))
-        #print("part 1 position 0: %s" % (str(prog[0])))
-
-
 if __name__ == '__main__':
-    #main_part1()
+    main_part1()
     main_part2()
     
