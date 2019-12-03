@@ -51,6 +51,50 @@ def brute_force():
 
     print("Manhattan distance - part 1: %s" % (str(manhattan_dist)))
 
+
+def not_dumb_2():
+    f = open("day03.txt")
+
+    wires = []
+    for line in f:
+        wires.append(line.rstrip().split(','))
+    f.close()
+
+    wire_positions = []
+    for wire in wires:
+        positions = []
+        pos = [0, 0]
+        for course in wire:
+            dir = course[0]
+            steps = int(course[1:])
+        
+            offset = get_offset(dir) 
+            for step in range(0, steps):
+                pos[0] += offset[0]
+                pos[1] += offset[1]
+                positions.append(copy.deepcopy(pos))
+
+        wire_positions.append(copy.deepcopy(positions))
+
+    print("wire distances: %i, %i" % (len(wire_positions[0]), len(wire_positions[1])))
+
+    min_steps = 999999999999999
+    wire_1_steps = 1
+    for pos in wire_positions[0]:
+        wire_2_steps = -1
+        if wire_1_steps < min_steps:
+            try:
+                wire_2_steps = wire_positions[1].index(pos) + 1
+                if (wire_1_steps + wire_2_steps) < min_steps:
+                    min_steps = min(wire_1_steps + wire_2_steps, min_steps)
+                    print("position: %s, shortest: %i, steps: %i, %i" % (str(pos), min_steps, wire_1_steps, wire_2_steps))
+            except ValueError:
+                wire_2_steps = -1
+
+        wire_1_steps += 1
+
+    print("Min steps - part 2: %s" % (str(min_steps)))
+
 def not_dumb():
     f = open("day03.txt")
 
@@ -89,6 +133,6 @@ def not_dumb():
     
 if __name__ == '__main__':
     #brute_force()
-    not_dumb()
+    not_dumb_2()
     
     
